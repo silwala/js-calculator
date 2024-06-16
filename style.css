@@ -6,17 +6,19 @@ body{
 
 .calculator-container{
     background-color: rgb(75, 75, 75);
-    width: 60vh;
+    width: 350px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
     border-radius: 15px;
 }
 
 .display{
+    flex: 1 1 15%;
     width: 95%;
-    height: 12vh;
+    font-size: 2.5em;
     background-color: green;
     border-radius: 10px;
     display: flex;
@@ -25,13 +27,16 @@ body{
     padding-right: 5%;
 }
 .buttons-container {
+    flex: 1 1 85%;
     width: 100%;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .rows{
+    flex: 1;
     display: flex;
-    height: 17vh;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -40,7 +45,7 @@ body{
     background-color: white;
     border-radius: 10px;
     flex: 1;
-    margin: 3px;
+    margin: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
