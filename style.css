@@ -60,7 +60,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.123);
     cursor: pointer;
 }
@@ -70,19 +69,21 @@ body{
 }
 
 :not(.row1) > .buttons{
-    border-radius: 50%;
+    border-radius: 25px;
+    font-size: 2em;
 }
 
 .row1{
-    width: 65%;
+    width: 50%;
     align-self: flex-end;
     justify-content: flex-end;
 }
 
 .row1 .buttons{
-    border-radius: 30px;
+    border-radius: 20px;
     height: 45px;
     align-self: center;
+    font-size: 1.5em;
 }
 
 .clear{
