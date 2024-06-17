@@ -1,3 +1,7 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 body{
     display: flex;
     justify-content: center;
@@ -5,22 +9,25 @@ body{
 }
 
 .calculator-container{
-    background-color: rgb(75, 75, 75);
-    width: 350px;
+    background-color: rgb(94, 94, 94);
+    width: 400px;
     height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.411);
 }
 
 .display{
     flex: 1 1 15%;
     width: 95%;
     font-size: 2.5em;
-    background-color: green;
-    border-radius: 10px;
+    background-color: rgb(153, 153, 153);
+    box-shadow: inset 3px 3px 3px rgb(94, 94, 94),
+                   inset -3px -3px 3px rgb(163, 163, 163);
+    border-radius: 20px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -35,19 +42,48 @@ body{
 }
 
 .rows{
-    flex: 1;
+    flex: 1 1 35%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.rows.row1{
+    flex-basis: 35%;
+}
+
 .buttons{
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(214, 214, 214);
     flex: 1;
-    margin: 5px;
+    margin: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2em;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.123);
+}
+
+:not(.row1) > .buttons{
+    border-radius: 50%;
+}
+
+.row1{
+    width: 65%;
+    align-self: flex-end;
+    justify-content: flex-end;
+}
+
+.row1 .buttons{
+    border-radius: 30px;
+    height: 45px;
+    align-self: center;
+}
+
+.clear{
+    background-color: rgb(241, 157, 0);
+    color: white;
+}
+
+.backspace{
+    background-color: rgb(236, 236, 236);
 }
