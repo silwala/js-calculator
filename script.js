@@ -92,7 +92,7 @@ function onBackspace(){
 }
 
 function isOperator(character){
-    return (isNaN(character) && character !== '.')
+    return (character === '+' || character === '-' || character === 'x' || character === '/')
 }
 
 function displayNumber(number){
@@ -115,7 +115,7 @@ function onClear(){
 function onOperator(operator){
     if(display.textContent.length === 14) return;
     if(operatorPressed){
-        operate();
+        if (operate() === 'error') return;
     }
     operatorPressed = true;
     currentOperator = operator;
@@ -149,7 +149,9 @@ function operate(){
         result = onDivide();
     }
     if(result.length > 14){
-        display.textContent = 'error';
+        display.textContent = 'length too long';
+        setTimeout(onClear, 1000);
+        return 'error';
     }
     else{
         display.textContent = result;
@@ -158,9 +160,9 @@ function operate(){
         firstNumber = result;
     }
     secondNumber = '0';
-    console.log(firstNumber);
-    console.log(secondNumber);
-    console.log(result);
+    console.log('f', firstNumber);
+    console.log('s', secondNumber);
+    console.log('r', result);
 }
 
 function onAdd(){
