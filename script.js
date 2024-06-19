@@ -1,5 +1,5 @@
 let result = '0';
-let firstNumber = '';
+let firstNumber = result;
 let secondNumber = '';
 let currentOperator = '';
 let operatorPressed = false;
@@ -39,6 +39,7 @@ dot.addEventListener('click', () => updateNumber('.'));
 add.addEventListener('click', () => onOperator('+'));
 sub.addEventListener('click', () => onOperator('-'));
 mul.addEventListener('click', () => onOperator('x'));
+equals.addEventListener('click', onEqual);
 divide.addEventListener('click', () => onOperator('/'));
 backspace.addEventListener('click', onBackspace);
 clear.addEventListener('click', onClear);
@@ -114,6 +115,7 @@ function onClear(){
 function onOperator(operator){
     if(display.textContent.length === 14) return;
     if(operatorPressed){
+        operate();
     }
     operatorPressed = true;
     currentOperator = operator;
@@ -124,7 +126,55 @@ function onOperator(operator){
     else{
         display.textContent += operator;
     }
-    console.log('operator');
 }
 
+function onEqual(){
+    operatorPressed = false;
+    operate();
+}
 
+function operate(){
+
+    if(currentOperator === '') return;
+    if(currentOperator === '+'){
+        result = onAdd();
+    }
+    else if(currentOperator === '-'){
+        result = onSub();
+    }
+    else if(currentOperator === 'x'){
+        result = onMul();
+    }
+    else if(currentOperator === '/'){
+        result = onDivide();
+    }
+    if(result.length > 14){
+        display.textContent = 'error';
+    }
+    else{
+        display.textContent = result;
+    }
+    if(operatorPressed){
+        firstNumber = result;
+    }
+    secondNumber = '0';
+    console.log(firstNumber);
+    console.log(secondNumber);
+    console.log(result);
+}
+
+function onAdd(){
+    return (Number(firstNumber) + Number(secondNumber)).toString();
+}
+
+function onSub(){
+    return (Number(firstNumber) - Number(secondNumber)).toString();
+}
+
+function onMul(){
+    return (Number(firstNumber) * Number(secondNumber)).toString();
+}
+
+function onDivide(){
+    return (Number(firstNumber) / Number(secondNumber)).toString();
+}
