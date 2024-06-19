@@ -1,3 +1,9 @@
+let result = '0';
+let firstNumber = '';
+let secondNumber = '';
+let currentOperator = '';
+let operatorPressed = false;
+
 let display = document.querySelector('.display')
 let one = document.querySelector('.one');
 let two = document.querySelector('.two');
@@ -10,6 +16,13 @@ let eight = document.querySelector('.eight');
 let nine = document.querySelector('.nine');
 let zero = document.querySelector('.zero');
 let dot = document.querySelector('.dot');
+let add = document.querySelector('.add');
+let sub = document.querySelector('.sub');
+let divide = document.querySelector('.divide');
+let mul = document.querySelector('.mul');
+let equals = document.querySelector('.equals');
+let clear = document.querySelector('.clear')
+let backspace = document.querySelector('.backspace')
 
 display.textContent = 0;
 one.addEventListener('click', () => updateNumber('1'));
@@ -23,32 +36,62 @@ eight.addEventListener('click', () => updateNumber('8'));
 nine.addEventListener('click', () => updateNumber('9'));
 zero.addEventListener('click', () => updateNumber('0'));
 dot.addEventListener('click', () => updateNumber('.'));
+add.addEventListener('click', () => onOperator('+'));
+sub.addEventListener('click', () => onOperator('-'));
+mul.addEventListener('click', () => onOperator('x'));
+divide.addEventListener('click', () => onOperator('/'));
+backspace.addEventListener('click', onBackspace);
+clear.addEventListener('click', onClear);
+display.textContent = result;
 
-let result = '0';
-let firstNumber = '';
-let secondNumber = '';
-let operatorPressed = false;
 
 function dotCheck(number){
     console.log(number.includes('.'))
     return number.includes('.');
 }  
 
+function checkCurrentNumber(){
+    if(operatorPressed) return secondNumber;
+    return firstNumber;
+}
+
 function updateNumber(number){
-    let currentNumber = firstNumber;
-    if(operatorPressed){
-        currentNumber = secondNumber;
-    }
-    
-    if(dotCheck(currentNumber)) return;
+    let currentNumber = checkCurrentNumber();
+    if(dotCheck(currentNumber) && number === '.') return;
     if(currentNumber === firstNumber){
+        if(display.textContent.length === 12) return;
         firstNumber += number; 
     }
+    else if(display.textContent.length === 14) return;
     else{
         console.log('secondNumber')
         secondNumber += number;
     }
     displayNumber(number);
+}
+
+function onBackspace(){
+    let currentNumber = checkCurrentNumber();
+    console.log('in');
+    let length = display.textContent.length;
+    if(isOperator(display.textContent[length - 1])) return;
+    console.log('still in')
+    display.textContent = display.textContent.slice(0, display.textContent.length - 1);
+    if(currentNumber === firstNumber){
+        firstNumber = firstNumber.slice(0, firstNumber.length - 1)
+        console.log(firstNumber);
+    }
+    else{
+        secondNumber = secondNumber.slice(0, secondNumber.length - 1)
+    }
+
+    if(display.textContent === ''){
+        display.textContent = '0';
+    }
+}
+
+function isOperator(character){
+    return (isNaN(character) && character !== '.')
 }
 
 function displayNumber(number){
@@ -60,6 +103,28 @@ function displayNumber(number){
     }
 }
 
+function onClear(){
+    result = '0';
+    firstNumber = '';
+    secondNumber = '';
+    operatorPressed = false;
+    display.textContent = result;
+}
 
+function onOperator(operator){
+    if(display.textContent.length === 14) return;
+    if(operatorPressed){
+    }
+    operatorPressed = true;
+    currentOperator = operator;
+    let length = display.textContent.length;
+    if(isOperator(display.textContent[length - 1])){
+        display.textContent = display.textContent.replace(display.textContent[length - 1], operator);
+    }
+    else{
+        display.textContent += operator;
+    }
+    console.log('operator');
+}
 
 
