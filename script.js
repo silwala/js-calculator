@@ -48,7 +48,6 @@ display.textContent = result;
 
 
 function dotCheck(number){
-    console.log(number.includes('.'))
     return number.includes('.');
 }  
 
@@ -69,7 +68,6 @@ function updateNumber(number){
     }
     else if(display.textContent.length === 14) return;
     else{
-        console.log('secondNumber')
         secondNumber += number;
     }
     displayNumber(number);
@@ -78,14 +76,11 @@ function updateNumber(number){
 
 function onBackspace(){
     let currentNumber = checkCurrentNumber();
-    console.log('in');
     let length = display.textContent.length;
     if(isOperator(display.textContent[length - 1])) return;
-    console.log('still in')
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     if(currentNumber === firstNumber){
         firstNumber = firstNumber.slice(0, firstNumber.length - 1)
-        console.log(firstNumber);
     }
     else{
         secondNumber = secondNumber.slice(0, secondNumber.length - 1)
@@ -119,8 +114,6 @@ function onClear(){
 }
 
 function onOperator(operator){
-    console.log(firstNumber)
-    console.log(secondNumber)
     if(display.textContent.length === 14) return;
     if(operatorPressed){
         if (operate() === 'error') return;
@@ -140,9 +133,6 @@ function onOperator(operator){
 function onEqual(){
     operatorPressed = false;
     equalsPressed = true;
-    console.log('first' + firstNumber);
-    console.log('second' + secondNumber);
-    console.log('result' + result);
     operate();
 }
 
@@ -199,7 +189,6 @@ function onDivide(){
 }
 
 function checkToRound(number){
-    console.log(typeof(number))
     let numParts;
     if(number.includes('.')){
         numParts = number.split('.');
