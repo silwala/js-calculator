@@ -7,7 +7,6 @@ let equalsPressed = false;
 
 let display = document.querySelector('.display')
 let numbers = document.querySelectorAll('.numBtn')
-let dot = document.querySelector('.dot');
 let add = document.querySelector('.add');
 let sub = document.querySelector('.sub');
 let divide = document.querySelector('.divide');
@@ -18,12 +17,11 @@ let backspace = document.querySelector('.backspace')
 
 display.textContent = 0;
 numbers.forEach((number) => number.addEventListener('click', () => updateNumber(number.textContent)))
-dot.addEventListener('click', () => updateNumber('.'));
 add.addEventListener('click', () => onOperator('+'));
 sub.addEventListener('click', () => onOperator('-'));
 mul.addEventListener('click', () => onOperator('x'));
-equals.addEventListener('click', onEqual);
 divide.addEventListener('click', () => onOperator('/'));
+equals.addEventListener('click', onEqual);
 backspace.addEventListener('click', onBackspace);
 clear.addEventListener('click', onClear);
 display.textContent = result;
