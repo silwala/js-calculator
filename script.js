@@ -1,8 +1,9 @@
 let result = '0';
-let firstNumber = result;
+let firstNumber = '';
 let secondNumber = '';
 let currentOperator = '';
 let operatorPressed = false;
+let equalsPressed = false;
 
 let display = document.querySelector('.display')
 let one = document.querySelector('.one');
@@ -61,6 +62,9 @@ function updateNumber(number){
     if(dotCheck(currentNumber) && number === '.') return;
     if(currentNumber === firstNumber){
         if(display.textContent.length === 12) return;
+        if(equalsPressed) {
+            onClear();
+        }
         firstNumber += number; 
     }
     else if(display.textContent.length === 14) return;
@@ -69,6 +73,7 @@ function updateNumber(number){
         secondNumber += number;
     }
     displayNumber(number);
+    console.log(firstNumber)
 }
 
 function onBackspace(){
@@ -106,18 +111,22 @@ function displayNumber(number){
 
 function onClear(){
     result = '0';
-    firstNumber = '';
+    firstNumber = result;
     secondNumber = '';
     operatorPressed = false;
+    equalsPressed = false;
     display.textContent = result;
 }
 
 function onOperator(operator){
+    console.log(firstNumber)
+    console.log(secondNumber)
     if(display.textContent.length === 14) return;
     if(operatorPressed){
         if (operate() === 'error') return;
     }
     operatorPressed = true;
+    equalsPressed = false;
     currentOperator = operator;
     let length = display.textContent.length;
     if(isOperator(display.textContent[length - 1])){
@@ -130,6 +139,10 @@ function onOperator(operator){
 
 function onEqual(){
     operatorPressed = false;
+    equalsPressed = true;
+    console.log('first' + firstNumber);
+    console.log('second' + secondNumber);
+    console.log('result' + result);
     operate();
 }
 
@@ -156,9 +169,7 @@ function operate(){
     else{
         display.textContent = result;
     }
-    if(operatorPressed){
-        firstNumber = result;
-    }
+    firstNumber = result;
     secondNumber = '0';
     console.log('f', firstNumber);
     console.log('s', secondNumber);
@@ -166,17 +177,36 @@ function operate(){
 }
 
 function onAdd(){
-    return (Number(firstNumber) + Number(secondNumber)).toString();
+    let answer = (Number(firstNumber) + Number(secondNumber)).toString();
+    return checkToRound(answer);
 }
 
 function onSub(){
-    return (Number(firstNumber) - Number(secondNumber)).toString();
+    let answer =  (Number(firstNumber) - Number(secondNumber)).toString();
+    return checkToRound(answer);
 }
 
 function onMul(){
-    return (Number(firstNumber) * Number(secondNumber)).toString();
+    let answer = (Number(firstNumber) * Number(secondNumber)).toString();
+    return checkToRound(answer);
+
 }
 
 function onDivide(){
-    return (Number(firstNumber) / Number(secondNumber)).toString();
+    let answer = (Number(firstNumber) / Number(secondNumber)).toString();
+    return checkToRound(answer);
+
+}
+
+function checkToRound(number){
+    console.log(typeof(number))
+    let numParts;
+    if(number.includes('.')){
+        numParts = number.split('.');
+        console.log(numParts[1])
+        if(numParts[1].length > 3){
+            return (Number(number).toFixed(3)).toString();
+        }
+    }
+    return number;
 }
