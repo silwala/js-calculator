@@ -52,14 +52,14 @@ function dotCheck(number){
 }  
 
 function checkCurrentNumber(){
-    if(operatorPressed) return secondNumber;
-    return firstNumber;
+    if(operatorPressed) return 'secondNumber';
+    return 'firstNumber';
 }
 
 function updateNumber(number){
     let currentNumber = checkCurrentNumber();
     if(dotCheck(currentNumber) && number === '.') return;
-    if(currentNumber === firstNumber){
+    if(currentNumber === 'firstNumber'){
         if(display.textContent.length === 12) return;
         if(equalsPressed) {
             onClear();
@@ -158,7 +158,10 @@ function operate(){
     else{
         display.textContent = result;
     }
+    console.log(typeof(result))
+    console.log(result);
     firstNumber = result;
+    console.log(firstNumber)
     secondNumber = '0';
 
 }
