@@ -71,7 +71,6 @@ function updateNumber(number){
         secondNumber += number;
     }
     displayNumber(number);
-    console.log(firstNumber)
 }
 
 function onBackspace(){
@@ -161,9 +160,7 @@ function operate(){
     }
     firstNumber = result;
     secondNumber = '0';
-    console.log('f', firstNumber);
-    console.log('s', secondNumber);
-    console.log('r', result);
+
 }
 
 function onAdd(){
@@ -192,7 +189,6 @@ function checkToRound(number){
     let numParts;
     if(number.includes('.')){
         numParts = number.split('.');
-        console.log(numParts[1])
         if(numParts[1].length > 3){
             return (Number(number).toFixed(3)).toString();
         }
