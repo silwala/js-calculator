@@ -158,10 +158,7 @@ function operate(){
     else{
         display.textContent = result;
     }
-    console.log(typeof(result))
-    console.log(result);
     firstNumber = result;
-    console.log(firstNumber)
     secondNumber = '0';
 
 }
