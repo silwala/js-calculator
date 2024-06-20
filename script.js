@@ -6,16 +6,7 @@ let operatorPressed = false;
 let equalsPressed = false;
 
 let display = document.querySelector('.display')
-let one = document.querySelector('.one');
-let two = document.querySelector('.two');
-let three = document.querySelector('.three');
-let four = document.querySelector('.four');
-let five = document.querySelector('.five');
-let six = document.querySelector('.six');
-let seven = document.querySelector('.seven');
-let eight = document.querySelector('.eight');
-let nine = document.querySelector('.nine');
-let zero = document.querySelector('.zero');
+let numbers = document.querySelectorAll('.numBtn')
 let dot = document.querySelector('.dot');
 let add = document.querySelector('.add');
 let sub = document.querySelector('.sub');
@@ -26,16 +17,7 @@ let clear = document.querySelector('.clear')
 let backspace = document.querySelector('.backspace')
 
 display.textContent = 0;
-one.addEventListener('click', () => updateNumber('1'));
-two.addEventListener('click', () => updateNumber('2'));
-three.addEventListener('click', () => updateNumber('3'));
-four.addEventListener('click', () => updateNumber('4'));
-five.addEventListener('click', () => updateNumber('5'));
-six.addEventListener('click', () => updateNumber('6'));
-seven.addEventListener('click', () => updateNumber('7'));
-eight.addEventListener('click', () => updateNumber('8'));
-nine.addEventListener('click', () => updateNumber('9'));
-zero.addEventListener('click', () => updateNumber('0'));
+numbers.forEach((number) => number.addEventListener('click', () => updateNumber(number.textContent)))
 dot.addEventListener('click', () => updateNumber('.'));
 add.addEventListener('click', () => onOperator('+'));
 sub.addEventListener('click', () => onOperator('-'));
@@ -160,7 +142,6 @@ function operate(){
     }
     firstNumber = result;
     secondNumber = '0';
-
 }
 
 function onAdd(){
